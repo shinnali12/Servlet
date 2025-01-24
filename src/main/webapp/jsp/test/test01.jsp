@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.Arrays" %>    
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,14 +33,61 @@
 	 	int sum = 0;	
 	 
 	 	for(int i = 0; i < scores.length; i++) {
-	 		sum += i;
+	 		sum += scores[i];
 	 	}
 	 	
-	 	double average = sum / scores.length;
+	 	double average = sum / (double)scores.length;
 	 %>
 	 
-	 <h3>점수 평균은 <%= average %></h3>
+	 <h3>점수 평균은 <%= average %> 입니다.</h3>
 	 
+	 <h3>2. 채점 결과</h3>
+	 
+	 <%
+	 	List<String> scoreList = Arrays.asList(new String[]{"X", "O", "O", "O", "X", "O", "O", "O", "X", "O"});
+	 	
+		int sum2 = 0;
+		for(int i = 0; i < scoreList.size(); i++) {
+			if(scoreList.get(i).equals("O")) {
+				sum2 += 10;  
+			}
+		}
+	 	 
+	 %>
+	 
+	 <h3>채점 결과는 <%= sum2 %>점 입니다.</h3>
+	 
+	 <h3>3. 1부터 n까지의 합계를 구하는 함수</h3>
+	 
+	 <%!
+	 	
+	 	int number = 50;
+	 	int numbersSum = addNumbers(number);
+	 	
+	 	public static int addNumbers(int number) {
+	 		int sum3 = 0;
+	 		
+	 		for(int i = 1; i <= number; i++) {
+				sum3 += i;
+			}
+			
+			return sum3;			
+	 	}
+	 
+	 %>
+	 
+	 <h3>1에서 <%= number %>까지의 합은 <%= numbersSum %></h3>	 
+	 
+	 <h3>4. 나이 구하기</h3>
+	 <%
+	 	String birthDay = "20010820";
+	 	int year = Integer.parseInt(birthDay.substring(0, 4));
+	 	
+	 	int age = 2025 - year - 1;
+	 	
+	 %>
+	 
+	 <h3><%= birthDay %>의 나이는 <%= age %>살 입니다.</h3>
 
 </body>
 </html>

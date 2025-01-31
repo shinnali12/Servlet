@@ -21,13 +21,25 @@
 		// 바나나, 딸기, 복숭아
 		String fruit = request.getParameter("fruit");
 		
+		// 좋아하는 음식을 모두 전달받고 보여준다.
+		// 민트초코, 하와이안피자, 번데기
+		// 파라미터들의 값들의 모든 출력이 배열형태로 리턴됨!!
+		String[] foodArray = request.getParameterValues("food");
+		
+		String foodString = "";
+		
+		for(int i = 0; i < foodArray.length; i++) {
+			// foodString = foodString + foodArray[i];
+			foodString += foodArray[i] + " ";
+		}
+		
 	%>
 	
 	
 	<h3><%= nickname %></h3>
 	<h3><%= animal %></h3>
 	<h3><%= fruit %></h3>
-	
+	<h3><%= foodString %></h3>
 
 </body>
 </html>

@@ -52,6 +52,14 @@
 				sum2 += 10;  
 			}
 		}
+		
+//		int score = 100;
+//		for(String answer:scoreList) {
+//			if(answer.equals("X")) {
+//				score -= 10;
+//			}
+//		}
+		
 	 	 
 	 %>
 	 

@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+#wrap {
+	width: 1200px;
+	margin: 0, auto;
+}
+
+header > .logo {
+	height: 70px;
+}
+
+nav {
+	height: 50px;	
+}
+
+.singer {
+	height: 250px;
+}
+.list {
+	height: 250px;
+}
+footer {
+	height: 50px;
+}

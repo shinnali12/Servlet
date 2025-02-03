@@ -56,14 +56,11 @@
 	    };
 	    list.add(map);
 	    
-	    String title = request.getParameter("title");
- 		String author = request.getParameter("author");
- 		String publisher = request.getParameter("publisher");
- 		String image = request.getParameter("image");
 	    
 	    
 	    
 	%>
+	
 	<div class="container">
 		<h3 class="text-center">책 목록</h3>
 		<table class="table text-center">
@@ -81,8 +78,10 @@
 		%>
 				<tr>
 					<td><%= bookList.get("id") %></td>
-					<td><img src="<%= bookList.get("image") %>" width="100" height="140"></td>
-					<td><a class="display-4" href="/jsp/test/test08-input.jsp"><%= bookList.get("title") %></a></td>
+					<td><img src="<%= bookList.get("image") %>" width="120"></td>
+					<td class="display-4">
+						<a href="/jsp/test/test08-input.jsp?id=<%= bookList.get("id") %>"><%= bookList.get("title") %></a>
+					</td>
 				</tr>
 			
 			

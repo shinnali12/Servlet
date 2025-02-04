@@ -89,16 +89,27 @@
 	    musicInfo.put("composer", "아이유,이종훈,이채규");
 	    musicInfo.put("lyricist", "아이유");
 	    musicList.add(musicInfo);
+	    
+	    String title = request.getParameter("title");
+	    
 	%>
 	
 	
 	
 	<div id="wrap" class="container">
-		<header class="logo d-flex align-items-center mt-2 mb-2">
-			<h3 class="text-success mr-3">Melong</h3>
-			<div class="search d-flex">
-				<input type="text" class="form-control col-5">
-				<button type="button" class="btn btn-info btn-sm">검색</button>
+		<header class="logo d-flex align-items-center">
+			<div class="logo col-2 d-flex align-items-center">
+				<h2 class="text-success">Melong</h2>
+			</div>
+			<div class="search col-10 d-flex align-items-center">
+				<form method="get" action="/jsp/test/test10/test10-music.jsp" class="col-6">
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" name="title">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-info btn-sm">검색</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</header>
 		<nav class="main-menu">
@@ -111,19 +122,19 @@
 			</ul>
 		</nav>
 		<section>
-			<div class="singer border border-success d-flex p-4">
-				<img src="<%= artistInfo.get("photo") %>">
-				<div class="ml-3 mt-3 font-weight-bold">
+			<div class="artist border border-success d-flex p-3">
+				<img width="150px" src="<%= artistInfo.get("photo") %>">
+				<div class="ml-3 font-weight-bold">
 					<h3><%= artistInfo.get("name") %></h3>
 					<div><%= artistInfo.get("agency") %></div>
-					<div><%= artistInfo.get("debute") %></div>
+					<div><%= artistInfo.get("debute") %> 데뷔</div>
 				</div>
 			</div>
 			
-			<div class="list">
-				<h3 class="mt-3">곡 목록</h3>
+			<div class="list mt-4">
+				<h3>곡 목록</h3>
 				<div>
-					<table class="table text-center font-wight-bolder">
+					<table class="table table-sm text-center font-wight-bolder">
 						<thead>
 							<tr>
 								<th>no</th>
@@ -136,7 +147,7 @@
 							<% for(Map<String, Object> music:musicList) { %>
 								<tr>
 									<td><%= music.get("id") %></td>
-									<td><a href="/jsp/test/test10/test10-music.jsp?"><%= music.get("title") %></a></td>
+									<td><a href="/jsp/test/test10/test10-music.jsp?id=<%= music.get("id") %>"><%= music.get("title") %></a></td>
 									<td><%= music.get("album") %></td>
 								</tr>
 							<% } %>

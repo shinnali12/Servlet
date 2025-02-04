@@ -12,6 +12,7 @@
 <body>
 	
 	<%
+	
 	// 아티스트 정보 
 	
 	    Map<String, Object> artistInfo = new HashMap<>();
@@ -89,18 +90,31 @@
 	    musicInfo.put("composer", "아이유,이종훈,이채규");
 	    musicInfo.put("lyricist", "아이유");
 	    musicList.add(musicInfo);
+	    
+	    String idString = request.getParameter("id");
+	    
+	    String title = request.getParameter("title");
+	    
+	    
 	%>
 	
 	
 	
 	<div id="wrap" class="container">
-		<header class="logo d-flex align-items-center mt-2 mb-2">
-			<h3 class="text-success mr-3">Melong</h3>
-			<div class="search d-flex">
-				<input type="text" class="form-control col-5">
-				<button type="button" class="btn btn-info btn-sm">검색</button>
+		<header class="logo d-flex align-items-center">
+			<div class="logo col-2 d-flex align-items-center">
+				<h2 class="text-success">Melong</h2>
+			</div>
+			<div class="search col-10 d-flex align-items-center">
+				<div class="input-group mb-3 col-6">
+					<input type="text" class="form-control">
+					<div class="input-group-append">
+						<button type="button" class="btn btn-info btn-sm">검색</button>
+					</div>
+				</div>
 			</div>
 		</header>
+		
 		<nav class="main-menu">
 			<ul class="nav font-weight-bold">
 				<li class="nav-item"><a href="#" class="nav-link text-dark">멜롱차트</a></li>
@@ -112,22 +126,49 @@
 		</nav>
 		<section>
 			<h3 class="mt-3">곡 정보</h3>
+			
 			<div class="song border border-success d-flex p-4">
-				<img src="">
-				<div class="ml-3 mt-3 font-weight-bold">
-					<h3></h3>
-					<div></div>
-					<div></div>
+				<% 	for(Map<String, Object> music:musicList) {
+						
+						// id 파라미터가 전달되면, id를 기준으로 일치 조건
+						// title 파라미터가 전달되면, title을 기준으로 일치 조건
+						int id = 0;
+						if(idString != null) {
+							id = Integer.parseInt(idString);
+						}
+						
+						
+						int time = (Integer)music.get("time");
+						
+						int albumId = (Integer)music.get("id");
+						
+						if(id !=0 & albumId == id || (title != null && title.equals(music.get("title")))) {
+					%>
+				<img width="150px" src="<%= music.get("thumbnail") %>">
+							
+				<div class="ml-3">
+					<h3><%= music.get("title") %></h3>
+					<div class="text-success"><%= music.get("singer") %></div>
+					<div class="mt-2">
+						<div>앨범 : <%= music.get("album") %></div>
+						<div>재생시간 : <%= time / 60 %> : <%= time % 60 %></div>
+						<div>작곡가 : <%= music.get("composer") %></div>
+						<div>작사가 : <%= music.get("lyricist") %></div>
+					</div>
 				</div>
 			</div>
-			
+				<% 		}
+				
+				 	}%>
 			<div class="list">
 				<h3 class="mt-3">가사</h3>
 				<hr>
-				<div>
+				<div class="mb-5">
 					가사 정보 없음
-				</div>				
+				</div>
 			</div>
+			
+			
 		</section>
 		<hr>
 		<footer>

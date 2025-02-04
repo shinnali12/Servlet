@@ -6,19 +6,15 @@
 }
 
 header > .logo {
-	width: 300px;
-	height: 40px;
+	height: 100px;
 }
 header > .search {
-	width: 900px;
-	height: 40px;
+	height: 100px;
 }
 
 nav {
 	height: 40px;	
 }
 
-.singer {
-	height: 200px;
-}
+
 

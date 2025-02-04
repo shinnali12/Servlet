@@ -111,38 +111,21 @@
 			</ul>
 		</nav>
 		<section>
-			<div class="singer border border-success d-flex p-4">
-				<img src="<%= artistInfo.get("photo") %>">
+			<h3 class="mt-3">곡 정보</h3>
+			<div class="song border border-success d-flex p-4">
+				<img src="">
 				<div class="ml-3 mt-3 font-weight-bold">
-					<h3><%= artistInfo.get("name") %></h3>
-					<div><%= artistInfo.get("agency") %></div>
-					<div><%= artistInfo.get("debute") %></div>
+					<h3></h3>
+					<div></div>
+					<div></div>
 				</div>
 			</div>
 			
 			<div class="list">
-				<h3 class="mt-3">곡 목록</h3>
+				<h3 class="mt-3">가사</h3>
+				<hr>
 				<div>
-					<table class="table text-center font-wight-bolder">
-						<thead>
-							<tr>
-								<th>no</th>
-								<th>제목</th>
-								<th>앨범</th>
-							</tr>
-						</thead>
-						<tbody>
-							<form method="get" action="/jsp/test/test10/test10-music.jsp">
-							<% for(Map<String, Object> music:musicList) { %>
-								<tr>
-									<td><%= music.get("id") %></td>
-									<td><a href="/jsp/test/test10/test10-music.jsp?"><%= music.get("title") %></a></td>
-									<td><%= music.get("album") %></td>
-								</tr>
-							<% } %>
-							</form>	
-						</tbody>
-					</table>
+					가사 정보 없음
 				</div>				
 			</div>
 		</section>

@@ -6,19 +6,19 @@
 }
 
 header > .logo {
-	height: 70px;
+	width: 300px;
+	height: 40px;
+}
+header > .search {
+	width: 900px;
+	height: 40px;
 }
 
 nav {
-	height: 50px;	
+	height: 40px;	
 }
 
 .singer {
-	height: 250px;
+	height: 200px;
 }
-.list {
-	height: 250px;
-}
-footer {
-	height: 50px;
-}
+

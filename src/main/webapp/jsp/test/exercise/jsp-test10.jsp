@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>   
+<%@ page import="java.util.ArrayList" %>    
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="/jsp/test/test10/test10.css">
+<title>음악 사이트</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<link rel="stylesheet" href="/jsp/test/exercise/jsp-test10.css">
 </head>
 <body>
-	
+
 	<%
-	
 	// 아티스트 정보 
 	
 	    Map<String, Object> artistInfo = new HashMap<>();
@@ -90,95 +92,73 @@
 	    musicInfo.put("composer", "아이유,이종훈,이채규");
 	    musicInfo.put("lyricist", "아이유");
 	    musicList.add(musicInfo);
-	    
-	    String idString = request.getParameter("id");
-	    
-	    String title = request.getParameter("title");
-	    
-	    
 	%>
-	
-	
-	
+
 	<div id="wrap" class="container">
-		<header class="logo d-flex align-items-center">
-			<div class="logo col-2 d-flex align-items-center">
-				<h2 class="text-success">Melong</h2>
+		<header class="d-flex">
+			<div class="logo text-success font-weight-bold d-flex justify-content-center align-items-center">
+				<h2>Melong</h2>
 			</div>
-			<div class="search col-10 d-flex align-items-center">
-				<div class="input-group mb-3 col-6">
-					<input type="text" class="form-control">
-					<div class="input-group-append">
-						<button type="button" class="btn btn-info btn-sm">검색</button>
+			<div class="search d-flex align-items-center pt-4">
+				<form method="get" action="/jsp/test/exercise/jsp-test10-music.jsp" class="col-8">
+					<div class="input-group mb-3">
+						<input type="text" class="form-control col-8" name="title">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-info">검색</button>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</header>
-		
 		<nav class="main-menu">
-			<ul class="nav font-weight-bold">
+			<lu class="nav font-weight-bold">
 				<li class="nav-item"><a href="#" class="nav-link text-dark">멜롱차트</a></li>
 				<li class="nav-item"><a href="#" class="nav-link text-dark">최신음악</a></li>
 				<li class="nav-item"><a href="#" class="nav-link text-dark">장르음악</a></li>
 				<li class="nav-item"><a href="#" class="nav-link text-dark">멜롱DJ</a></li>
 				<li class="nav-item"><a href="#" class="nav-link text-dark">뮤직어워드</a></li>
-			</ul>
+			</lu>
 		</nav>
 		<section>
-			<h3 class="mt-3">곡 정보</h3>
-			
-			<div class="song border border-success d-flex p-4">
-				<% 	for(Map<String, Object> music:musicList) {
-						
-						// id 파라미터가 전달되면, id를 기준으로 일치 조건
-						// title 파라미터가 전달되면, title을 기준으로 일치 조건
-						int id = 0;
-						if(idString != null) {
-							id = Integer.parseInt(idString);
-						}
-						
-						
-						int time = (Integer)music.get("time");
-						
-						int albumId = (Integer)music.get("id");
-						
-						if(id !=0 && albumId == id || (title != null && title.equals(music.get("title")))) {
-					%>
-				<img width="150px" src="<%= music.get("thumbnail") %>">
-							
-				<div class="ml-3">
-					<h3><%= music.get("title") %></h3>
-					<div class="text-success"><%= music.get("singer") %></div>
-					<div class="mt-2">
-						<div>앨범 : <%= music.get("album") %></div>
-						<div>재생시간 : <%= time / 60 %> : <%= time % 60 %></div>
-						<div>작곡가 : <%= music.get("composer") %></div>
-						<div>작사가 : <%= music.get("lyricist") %></div>
-					</div>
+			<div class="artist d-flex p-3 border border-success">
+				<img width="200px" src="<%= artistInfo.get("photo") %>">
+				<div class="mt-4 ml-3">
+					<h2 class="font-weight-bold"><%= artistInfo.get("name") %></a></h2>
+					<div><%= artistInfo.get("agency") %></div>
+					<div><%= artistInfo.get("debute") %> 데뷔</div>
+				</div>
+			</div>			
+			<div class="songList">
+				<h3 class="mt-4">곡 목록</h3>
+				<div>
+					<table class="table text-center">
+						<thead>
+							<tr>
+								<th>no</th>
+								<th>제목</th>
+								<th>앨범</th>
+							</tr>
+						</thead>
+						<tbody>
+							<form method="get" action="/jsp/test/exercise/jsp-test10-music.jsp">
+						<%	for(Map<String, Object> music:musicList) { %>	
+								<tr>
+									<td><%= music.get("id") %></td>
+									<td><a href="/jsp/test/exercise/jsp-test10-music.jsp?id=<%= music.get("id") %>"><%= music.get("title") %></td>
+									<td><%= music.get("album") %></td>
+								</tr>
+						<%	} %>	
+							</form>
+						</tbody>
+					</table>
 				</div>
 			</div>
-				<% 		}
-				
-				 	}%>
-			<div class="list">
-				<h3 class="mt-3">가사</h3>
-				<hr>
-				<div class="mb-5">
-					가사 정보 없음
-				</div>
-			</div>
-			
-			
 		</section>
 		<hr>
-		<footer>
-		 <div>Copyright 2025. melong All Rights Reserves.</div>
-		</footer>
+		<footer class="font-weight-light mt-2">Copyright 2025. melong All Rights Reserved.</footer>
 	</div>
-
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
 </body>
 </html>

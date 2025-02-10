@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.marondal.common.MysqlService" %>
-<%@ page import="java.sql.ResultSet" %>    
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.util.*" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,11 +13,11 @@
 <body>
 
 <%
-	MysqlService mysqlService = new MysqlService();
+	MysqlService mysqlService = MysqlService.getInstance();
 	
 	mysqlService.connect();
 	
-	ResultSet resultSet = mysqlService.select("SELECT * FROM `favorite` ORDER BY `id` DESC");
+	List<Map<String, Object>> resultList = mysqlService.select("SELECT * FROM `favorite` ORDER BY `id` DESC");
 
 %>
 
@@ -30,13 +31,15 @@
 				<tr>
 					<th>사이트</th>
 					<th>사이트 주소</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
-			<%	while(resultSet.next()) { %>
+			<%	for(Map<String, Object> result:resultList) { %>
 				<tr>
-					<td><%= resultSet.getString("name") %></td>
-					<td><a href="<%= resultSet.getString("url") %>"><%= resultSet.getString("url") %></a></td>
+					<td><%= result.get("name") %></td>
+					<td><a href="<%= result.get("url") %>" target="_blank"><%= result.get("url") %></a></td>
+					<td><a href="/db/favorite/delete?id=<%= result.get("id") %>">삭제</a></td>
 				</tr>
 			<%	} %>	
 			</tbody>

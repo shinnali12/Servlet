@@ -10,15 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.marondal.common.MysqlService;
 
 @WebServlet("/db/favorite/create")
-public class favoriteCreateController extends HttpServlet {
+public class FavortiteCreateController extends HttpServlet {
 	
 	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException  {
 		
 		String name = request.getParameter("name");
 		String url = request.getParameter("url");
 		
-		MysqlService mysqlService = new MysqlService();
+		MysqlService mysqlService = MysqlService.getInstance();
 		
 		mysqlService.connect();
 		
@@ -31,6 +31,6 @@ public class favoriteCreateController extends HttpServlet {
 		
 		response.sendRedirect("/db/favorite/list.jsp");
 		
-	}
+	}	
 
 }

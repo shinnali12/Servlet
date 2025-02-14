@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+#wrap {
+	width: 1200px;
+	height: 800px;
+}
+
+header {
+	height: 200px;
+	background-color: chocolate;
+}
+
+nav {
+	height: 50px;
+	background-color: chocolate;
+}
+
+section {
+	height: 500px;
+}
+footer {
+	height: 100px;
+}
